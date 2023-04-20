@@ -34,7 +34,7 @@ export default function TVShowCard(props) {
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card className='tv-show-card' sx={{ maxWidth: 345 }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">

@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 function App() {
 
   const [apiData, setAPIData] = useState([]);
+  const [showData, setShowData] = useState([]);
   //we must stream the data from the API, because it is too large and can block the browser
   let all_data = [];
   const fetchNdjson = async () => {
@@ -24,7 +25,20 @@ function App() {
     //console.log(all_data[0][5519])
     setAPIData(all_data[0]);
   }
-  //fetchNdjson();
+
+  const fetchShowData = async () => {
+    const response = await fetch("https://api.tvmaze.com/shows/1");
+    const exampleReader = ndjsonStream(response.body).getReader();
+  
+    let result;
+    while (!result || !result.done) {
+      result = await exampleReader.read();
+      //all_data.push(result.value);
+      //console.log(result.done, result.value); //result.value is one line of your NDJSON data
+    }
+    //setAPIData(all_data[0]);
+  }
+
   useEffect(() => {
     fetchNdjson();
   },[])
@@ -34,19 +48,19 @@ function App() {
 
   return (
     <div className="App">
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1 }} ml="10vw">
       <Grid container spacing={2}>
 
           {apiData.map((item) => {
         if (item.image != null && item.summary != null){
           
         return (<Grid item xs={4}>
-          <TVShowCard title={item.name} imageURL={item.image.medium} date={String(item.airdate+" "+item.airtime)} summary={item.summary.replace(/<\/?[^>]+(>|$)/g, "")}/>
+          <TVShowCard className="tv-show-card" title={item.name} imageURL={item.image.medium} date={String(item.airdate+" "+item.airtime)} summary={item.summary.replace(/<\/?[^>]+(>|$)/g, "")} key={item.id}/>
                 </Grid>)
         }
         else {
          
-          return ( <Grid item xs={4}><TVShowCard title={item.name} date={String(item.airdate+" "+item.airtime)}/>
+          return ( <Grid item xs={4}><TVShowCard className="tv-show-card" title={item.name} date={String(item.airdate+" "+item.airtime)} key={item.id}/>
           </Grid>)
         }
       })}
