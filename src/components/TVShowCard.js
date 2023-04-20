@@ -47,19 +47,17 @@ export default function TVShowCard(props) {
           </IconButton>
         }
         title={props.title}
-        subheader="September 14, 2016"
+        subheader={props.date}
       />
       <CardMedia
         component="img"
         height="194"
-        image="/static/images/cards/paella.jpg"
+        image={props.imageURL}
         alt="Paella dish"
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the mussels,
-          if you like.
+          {props.summary}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
