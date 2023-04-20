@@ -1,23 +1,28 @@
 import logo from './logo.svg';
 import './App.css';
+import TVShowCard from './components/TVShowCard';
+import ndjsonStream from 'can-ndjson-stream';
 
 function App() {
+  //we must stream the data from the API, because it is too large and can block the browser
+  const fetchNdjson = async () => {
+    const response = await fetch("https://api.tvmaze.com/schedule/full");
+    const exampleReader = ndjsonStream(response.body).getReader();
+  
+    let result;
+    let all_data = [];
+    while (!result || !result.done) {
+      result = await exampleReader.read();
+      all_data.push(result.value);
+      console.log(result.done, result.value); //result.value is one line of your NDJSON data
+    }
+    //console.log(all_data[0][5520])
+  }
+  fetchNdjson();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <TVShowCard title="Hello 1st card"/>
     </div>
   );
 }
