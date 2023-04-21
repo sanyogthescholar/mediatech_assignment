@@ -3,8 +3,7 @@ import ndjsonStream from 'can-ndjson-stream';
 import { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import {BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import TVShowDetails from './TVShowDetails';
+import { Link } from 'react-router-dom';
 
 function HomePage() {
 

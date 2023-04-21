@@ -71,3 +71,15 @@
 a {
   text-decoration: none;
 }
+
+/*make the show-detail-img component smaller to 50% and align the text to the right*/
+.show-detail-img {
+  width: 50%;
+  height: 50%;
+  float: left;
+}
+
+.show-detail-text {
+  width: 50%;
+  float: right;
+}
