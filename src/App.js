@@ -8,7 +8,7 @@ function App() {
     <Router>
     <Switch>
     <Route exact path="/"><HomePage/></Route>
-    <Route exact path="/showdetails/:id"><TVShowDetails/></Route>
+    <Route exact path="/showdetails/:id"><TVShowDetails key="1"/></Route>
     </Switch>
     </Router>
   );

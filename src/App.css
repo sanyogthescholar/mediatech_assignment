@@ -74,12 +74,21 @@ a {
 
 /*make the show-detail-img component smaller to 50% and align the text to the right*/
 .show-detail-img {
-  width: 50%;
-  height: 50%;
+  width: 400px;
+  height: auto;
   float: left;
 }
 
 .show-detail-text {
   width: 50%;
   float: right;
+  margin-top: 12.5vh;
+}
+
+.show-details {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }

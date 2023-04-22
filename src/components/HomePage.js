@@ -11,7 +11,8 @@ function HomePage() {
     //we must stream the data from the API, because it is too large and can block the browser
     let all_data = [];
     const fetchNdjson = async () => {
-      const response = await fetch("https://api.tvmaze.com/schedule/web?date="+String(new Date().toISOString().split('T')[0]));
+      /* const response = await fetch("https://api.tvmaze.com/schedule/web?date="+String(new Date().toISOString().split('T')[0])); */
+      const response = await fetch("https://api.tvmaze.com/schedule/web?date=2021-09-20");
       const exampleReader = ndjsonStream(response.body).getReader();
     
       let result;
