@@ -11,8 +11,7 @@ function HomePage() {
     //we must stream the data from the API, because it is too large and can block the browser
     let all_data = [];
     const fetchNdjson = async () => {
-      /* const response = await fetch("https://api.tvmaze.com/schedule/web?date="+String(new Date().toISOString().split('T')[0])); */
-      const response = await fetch("https://api.tvmaze.com/schedule/web?date=2023-04-21");
+      const response = await fetch("https://api.tvmaze.com/schedule/web?date="+String(new Date().toISOString().split('T')[0]));
       const exampleReader = ndjsonStream(response.body).getReader();
 
       let result;
@@ -30,12 +29,12 @@ function HomePage() {
     useEffect(() => {
       console.log(apiData)
     },[apiData])
-  
+
     return (
       <>
         <Box sx={{ flexGrow: 1 }} ml="10vw">
         <Grid container spacing={2}>
-  
+
             {apiData.map((item) => {
           if (item.image != null && item.summary != null){
 
@@ -44,16 +43,6 @@ function HomePage() {
             <TVShowCard className="tv-show-card" title={item._embedded.show.name} imageURL={item.image.medium} date={String(item.airdate+" "+item.airtime)} summary={item._embedded.show.summary.replace(/<\/?[^>]+(>|$)/g, "")} key={item.id}/>
                   </Link>
                   </Grid>)
-          }
-          else if(item.image != null && item.summary == null) {
-            return ( <Grid item xs={4}><Link to={`/showdetails/${item.id}`}><TVShowCard mt="100px" pt="100px" className="tv-show-card" title={item.name} imageURL={item.image.medium} date={String(item.airdate+" "+item.airtime)} key={item.id}/>
-            </Link></Grid>
-          )
-          }
-          else if(item.image == null && item.summary != null) {
-            return ( <Grid item xs={4}><Link to={`/showdetails/${item.id}`}><TVShowCard mt="100px" pt="100px" className="tv-show-card" title={item.name} date={String(item.airdate+" "+item.airtime)} summary={item._embedded.show.summary.replace(/<\/?[^>]+(>|$)/g, "")} key={item.id}/>
-            </Link></Grid>
-          )
           }
         })}
         </Grid>

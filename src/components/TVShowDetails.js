@@ -21,21 +21,17 @@ function TVShowDetails() {
     useEffect(()=>{
       fetchNdjsonShow()//call api once
     },[])
+    useEffect(()=>{
+      if (apiShowData[0].image == null)
+      {
+        apiShowData[0]['image']['original'] = ""
+      }
+    },[apiShowData])
 
     return (
       <>
-    {apiShowData.map((item)=>{
-        if(item.image != null){
-          return(
-        <TVShowDetailCard title={item.name} summary={item.summary.replace(/<\/?[^>]+(>|$)/g, "")}/>
-    )}
-    else {
-      return(
-        <TVShowDetailCard imageURL={item.image.original} title={item.name} summary={item.summary.replace(/<\/?[^>]+(>|$)/g, "")}/>
-    )}
-    }
-    )}
-        </>
+        <TVShowDetailCard imageURL={apiShowData[0].image.original} title={apiShowData[0].name} summary={apiShowData[0].summary.replace(/<\/?[^>]+(>|$)/g, "")}/>
+      </>
     );
   }
 
